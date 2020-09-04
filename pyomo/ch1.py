@@ -6,8 +6,12 @@ Ref : http://www.pyomo.org/
       https://github.com/Pyomo/pyomo
 
 All Book Code Examples : pyomo/examples/doc/pyomobook
+    https://jckantor.github.io/ND-Pyomo-Cookbook/
 
-https://jckantor.github.io/ND-Pyomo-Cookbook/
+Optimizers
+    IPOPT : Used for non-linear optimization
+    GLPK : Used for linear optimization and solutions in this book.
+    CPLEX : For Stochastic optimization.
 """
 
 # Import Library --------------------------------------------------------------
