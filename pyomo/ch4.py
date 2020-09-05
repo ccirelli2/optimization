@@ -6,6 +6,7 @@ Created on Thu Sep  3 10:37:16 2020
 """
 # Import Libraries ------------------------------------------------------------
 from pyomo.environ import *
+import numpy as np
 
 def ex_indexed_constraint():
     model = ConcreteModel()
@@ -48,11 +49,30 @@ def create_var_fixed_vals():
     for i in indx:
         model.ab[i].fix(i)
     model.ab.display()
-    vals = [x.values() for x in model.ab]
-    print('Var => model.ab, Varlues => {}'.format(vals))
 
 
 
+def create_var_fixed_vals_v2():
+    model = ConcreteModel()
+    premiums = np.random.randint(1, 100, 10)
+    incurred = np.random.randint(1, 7, 10)
+    indx = [x for x in range(0, 10)]
+    # Build Dictionary
+    dict_prems = {}
+    for x,y in zip(indx, premiums):
+        dict_prems[x] = y
+    model.A = Var(indx, initialize=dict_prems)
+    model.A.display()
+    # Fix Model.A Values
+    [model.A[key].fix(model.A[key].value) for key in dict_prems]
+    model.A.display()
+    # Create Sum of Premium Value From Model.A
+    sum_prem = sum([model.A[key].value for key in dict_prems])
+    model.B = Var(initialize=sum_prem)
+    model.B.fix(sum_prem)
+    model.B.display()
+
+create_var_fixed_vals_v2()
 
 
 
