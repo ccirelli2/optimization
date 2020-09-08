@@ -90,6 +90,10 @@ def create_rmf_var_v2(display, debug):
 
 
 
+calcs_var_fixed_vals()
+
+
+
 
 
 

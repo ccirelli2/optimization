@@ -7,6 +7,7 @@ Created on Thu Sep  3 10:37:16 2020
 # Import Libraries ------------------------------------------------------------
 from pyomo.environ import *
 import numpy as np
+import sys
 
 def ex_indexed_constraint():
     model = ConcreteModel()
@@ -72,9 +73,27 @@ def create_var_fixed_vals_v2():
     model.B.fix(sum_prem)
     model.B.display()
 
-create_var_fixed_vals_v2()
+def create_var_dict(index, var):
+    # Create Dictioary Object
+    dict_var = {}
+    # Populate Dictiony with index as key and var as values
+    for x,y in zip(index, var):
+        dict_var[x] = y
+    # Return Pyomo Object
+    return dict_var
 
-
+def funct_fix_var_vals_incur(index, model, var):
+    # Create Dictioary Object
+    dict_prems = {}
+    # Populate Dictiony with index as key and var as values
+    for x,y in zip(index, var):
+        dict_prems[x] = y
+    # Pass Index & Dictionary To Pyomo Object
+    model.incur = Var(index, initialize=dict_prems)
+    # Fix Model.A Values
+    [model.incur[key].fix(model.incur[key].value) for key in dict_prems]
+    # Return Pyomo Object
+    return model.incur
 
 
 
