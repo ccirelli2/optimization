@@ -55,7 +55,7 @@ def concrete_model_v1():
     print('Objective Function Solution => {}'.format(model.obj()))
     print('Optimal solution x1 => {}'.format(model.x_1()))
     print('Optimal solution x_2 => {}'.format(model.x_2()))
-#concrete_model_v1()
+concrete_model_v1()
 
 
 # 1.2.2 Minimum Graph Coloring Example ----------------------------------------
